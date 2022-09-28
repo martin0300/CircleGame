@@ -322,7 +322,7 @@ function getSetDarkMode(task, args) {
 	}
 }
 
-window.addEventListener("load", function () {
+function loaded() {
 	gameStuff.gameCanvas = this.document.getElementById("gamecanvas");
 	gameStuff.game2d = gameStuff.gameCanvas.getContext("2d");
 	gameStuff.gameCanvas.height = this.window.innerHeight;
@@ -340,20 +340,20 @@ window.addEventListener("load", function () {
 		gameStuff.bgColor = "white";
 		gameStuff.textColor = "black";
 	}
-	this.setInterval(gameLoop, 0.06);
+	setInterval(gameLoop, 0.06);
 	window.addEventListener("resize", function () {
-		gameStuff.gameCanvas.height = this.window.innerHeight;
-		gameStuff.gameCanvas.width = this.window.innerWidth;
+		gameStuff.gameCanvas.height = window.innerHeight;
+		gameStuff.gameCanvas.width = window.innerWidth;
 	});
-	this.document.addEventListener("mousemove", getMousePos);
-	this.gameStuff.gameCanvas.addEventListener("click", function () {
+	document.addEventListener("mousemove", getMousePos);
+	gameStuff.gameCanvas.addEventListener("click", function () {
 		if (!gameStuff.isPaused) {
 			gameStuff.circle.clickHandler();
 			gameStuff.badCircle.clickHandler();
 			gameStuff.veriGudm8Circle.clickHandler();
 		}
 	});
-	this.document.addEventListener("keypress", function (e) {
+	document.addEventListener("keypress", function (e) {
 		if (e.key == "m") {
 			if (gameStuff.bgColor == "white") {
 				gameStuff.bgColor = "black";
@@ -379,4 +379,6 @@ window.addEventListener("load", function () {
 			activateFullscreen();
 		}
 	});
-});
+}
+
+window.addEventListener("load", loaded);
